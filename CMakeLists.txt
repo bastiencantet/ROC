@@ -15,7 +15,7 @@ set(SOURCE_FILES
         src/Window/Window.cpp
         src/Images/IconImage.hpp
         src/enums.hpp
-        src/Images/IconImage.cpp)
+        src/Images/IconImage.cpp src/Instance/Instance.cpp src/Device/PhysicalDevice.hpp src/Device/PhysicalDevice.cpp src/shared.hpp src/Surface/Surface.hpp src/Surface/Surface.cpp)
 
 if(APPLE)
 
@@ -40,7 +40,7 @@ if (UNIX AND NOT APPLE)
         if (NOT X11_FOUND)
             message(FATAL_ERROR "X11 not found")
         endif()
-        set(SOURCE_FILES ${SOURCE_FILES} src/Platforms/X11/XWindow.cpp)
+        set(SOURCE_FILES ${SOURCE_FILES} src/Platforms/X11/XWindow.cpp src/Surface/Surface.cpp)
         # Window manager is X11, do something
     endif()
 endif()

@@ -11,7 +11,8 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include <vector>
-
+#include <Device/PhysicalDevice.hpp>
+#include "Surface/Surface.hpp"
 
 #ifdef __APPLE__
 extern "C" void disableMinimizeButton(GLFWwindow *window);
@@ -41,10 +42,20 @@ namespace Rc {
         _window = glfwCreateWindow(_width, _height, _title, nullptr, nullptr);
         glfwSetWindowUserPointer(_window, this);
         glfwSetFramebufferSizeCallback(_window, framebufferResizeCallback);
-        initInstance();
+        _instance.initInstance();
+        _instance.createSurface(_window);
+
+        Surface& surface = Surface::getInstance();
+        surface.createSurface(_window, _instance.getInstance());
+
+        PhysicalDevice& physicalDevice = PhysicalDevice::getInstance();
+        physicalDevice.findPhysicalDevice(_instance.getInstance());
+
     }
 
     Window::~Window() {
+        glfwDestroyWindow(_window);
+        glfwTerminate();
         std::cout << "Window destroyed" << std::endl;
     }
 
@@ -120,128 +131,6 @@ namespace Rc {
         glfwSetWindowTitle(_window, title);
     }
 
-    bool Window::checkValidationLayerSupport() {
-        uint32_t layerCount;
-        vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
-
-        std::vector<VkLayerProperties> availableLayers(layerCount);
-        vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
-
-        for (const char *layerName: validationLayers) {
-            bool layerFound = false;
-
-            for (const auto &layerProperties: availableLayers) {
-                if (strcmp(layerName, layerProperties.layerName) == 0) {
-                    layerFound = true;
-                    break;
-                }
-            }
-
-            if (!layerFound) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-
-    std::vector<const char *> Window::getRequiredExtensions() const {
-        uint32_t glfwExtensionCount = 0;
-        const char **glfwExtensions;
-        glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-        //add debug extension
-
-        std::vector<const char *> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
-
-        if (_validationLayersEnabled) {
-            extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-            extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
-            extensions.push_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
-        }
-
-        //print extensions
-        for (const auto &extension: extensions) {
-            //LOG(INFO) << "Required extension: " << extension;
-        }
-
-        return extensions;
-    }
-
-    bool Window::checkMissingExtensions() const {
-        // Check for missing extensions
-        uint32_t extensionCount = 0;
-        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-        std::vector<VkExtensionProperties> extensions(extensionCount);
-        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
-        std::vector<const char *> missingExtensions;
-        for (const auto &extension: getRequiredExtensions()) {
-            bool found = false;
-            for (const auto &availableExtension: extensions) {
-                if (strcmp(extension, availableExtension.extensionName) == 0) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                missingExtensions.push_back(extension);
-            }
-        }
-        if (!missingExtensions.empty()) {
-            //  LOG(ERROR) << "Missing extensions:";
-            for (const auto &extension: missingExtensions) {
-                // LOG(ERROR) << extension;
-            }
-            return false;
-        }
-        return true;
-    }
-
-    void Window::initInstance() {
-        if (_validationLayersEnabled && !checkValidationLayerSupport()) {
-            throw std::runtime_error("validation layers requested, but not available!");
-        }
-
-        if (!checkMissingExtensions()) {
-            throw std::runtime_error("Missing extension");
-        }
-
-        VkApplicationInfo appInfo = {};
-        appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-        appInfo.pApplicationName = "Hello Triangle";
-        appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
-        appInfo.pEngineName = "No Engine";
-        appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
-        appInfo.apiVersion = VK_API_VERSION_1_0;
-
-        VkInstanceCreateInfo createInfo{};
-        createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-        createInfo.pApplicationInfo = &appInfo;
-        uint32_t glfwExtensionCount = 0;
-        const char **glfwExtensions;
-
-        glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-        auto extensions = getRequiredExtensions();
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
-        createInfo.ppEnabledExtensionNames = extensions.data();
-        VkDebugUtilsMessengerCreateInfoEXT debugCreateInfo{};
-        if (_validationLayersEnabled) {
-            debugCreateInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-            createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
-            createInfo.ppEnabledLayerNames = validationLayers.data();
-            createInfo.pNext = &debugCreateInfo;
-        } else {
-            createInfo.enabledLayerCount = 0;
-
-            createInfo.pNext = nullptr;
-        }
-
-        createInfo.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
-        if (vkCreateInstance(&createInfo, nullptr, &_instance) != VK_SUCCESS) {
-            throw std::runtime_error("failed to create instance!");
-        }
-
-    }
 
 
 

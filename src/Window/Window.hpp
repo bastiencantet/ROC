@@ -10,6 +10,7 @@
 #include <GLFW/glfw3.h>
 #include "Images/IconImage.hpp"
 #include <Vulkan/vulkan.h>
+#include "Instance//Instance.hpp"
 
 #ifndef BB_ROC_WINDOW_HPP
 #define BB_ROC_WINDOW_HPP
@@ -45,22 +46,18 @@ namespace Rc {
 
         private:
             static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
-            static bool checkValidationLayerSupport();
-            bool checkMissingExtensions() const;
-            [[nodiscard]] std::vector<const char *> getRequiredExtensions() const;
-            void initInstance();
+
 
             int _width;
             int _height;
             const char *_title;
             GLFWwindow *_window;
-            VkInstance _instance;
+            Instance _instance;
 
 
 
 
 
-            bool _validationLayersEnabled = true;
     };
 }
 
