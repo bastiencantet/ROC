@@ -10,7 +10,7 @@
 #include <GLFW/glfw3.h>
 #include "Images/IconImage.hpp"
 #include <Vulkan/vulkan.h>
-#include "Instance//Instance.hpp"
+#include "Instance/Instance.hpp"
 
 #ifndef BB_ROC_WINDOW_HPP
 #define BB_ROC_WINDOW_HPP

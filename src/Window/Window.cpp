@@ -12,6 +12,7 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <Device/PhysicalDevice.hpp>
+#include <Device/LogicalDevice.hpp>
 #include "Surface/Surface.hpp"
 
 #ifdef __APPLE__
@@ -50,6 +51,11 @@ namespace Rc {
 
         PhysicalDevice& physicalDevice = PhysicalDevice::getInstance();
         physicalDevice.findPhysicalDevice(_instance.getInstance());
+
+        LogicalDevice& logicalDevice = LogicalDevice::getInstance();
+        logicalDevice.createLogicalDevice(physicalDevice.getPhysicalDevice(),  surface.getSurface(), _instance);
+
+        std::cout << "Window created" << std::endl;
 
     }
 

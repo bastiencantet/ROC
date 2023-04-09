@@ -10,8 +10,8 @@
 #include "Surface.hpp"
 #include <iostream>
 
-VkSurfaceKHR Rc::Surface::getSurface() const {
-    return _surface;
+VkSurfaceKHR& Rc::Surface::getSurface() const {
+    return const_cast<VkSurfaceKHR&>(_surface);
 }
 
 void Rc::Surface::createSurface(GLFWwindow *window, VkInstance &instance) {

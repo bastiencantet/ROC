@@ -88,7 +88,8 @@
 				5,
 				6,
 				8,
-				11
+				11,
+				12
 			]
 		},
 		{
@@ -118,8 +119,8 @@
 			"language" : "C",
 			"sourceIndexes" : 
 			[
-				12,
-				13
+				13,
+				14
 			]
 		}
 	],
@@ -177,7 +178,8 @@
 				8,
 				11,
 				12,
-				13
+				13,
+				14
 			]
 		},
 		{
@@ -259,6 +261,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/Surface/Surface.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/Device/LogicalDevice.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

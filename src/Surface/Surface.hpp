@@ -20,7 +20,7 @@ namespace Rc {
             static Surface instance;
             return instance;
         }
-    [[nodiscard]] VkSurfaceKHR getSurface() const;
+    [[nodiscard]] VkSurfaceKHR& getSurface() const;
     void createSurface(GLFWwindow *window , VkInstance &instance);
     private:
         VkSurfaceKHR _surface;

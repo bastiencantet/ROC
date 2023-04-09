@@ -15,7 +15,7 @@ set(SOURCE_FILES
         src/Window/Window.cpp
         src/Images/IconImage.hpp
         src/enums.hpp
-        src/Images/IconImage.cpp src/Instance/Instance.cpp src/Device/PhysicalDevice.hpp src/Device/PhysicalDevice.cpp src/shared.hpp src/Surface/Surface.hpp src/Surface/Surface.cpp)
+        src/Images/IconImage.cpp src/Instance/Instance.cpp src/Device/PhysicalDevice.hpp src/Device/PhysicalDevice.cpp src/shared.hpp src/Surface/Surface.hpp src/Surface/Surface.cpp src/Device/LogicalDevice.cpp)
 
 if(APPLE)
 

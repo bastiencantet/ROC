@@ -91,6 +91,13 @@ build CMakeFiles/BB_ROC.dir/src/Surface/Surface.cpp.o: CXX_COMPILER__BB_ROC_Debu
   OBJECT_DIR = CMakeFiles/BB_ROC.dir
   OBJECT_FILE_DIR = CMakeFiles/BB_ROC.dir/src/Surface
 
+build CMakeFiles/BB_ROC.dir/src/Device/LogicalDevice.cpp.o: CXX_COMPILER__BB_ROC_Debug /Users/bastiencantet/Documents/dev/perso/vulkan/ROC/src/Device/LogicalDevice.cpp || cmake_object_order_depends_target_BB_ROC
+  DEP_FILE = CMakeFiles/BB_ROC.dir/src/Device/LogicalDevice.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -fcolor-diagnostics -std=gnu++2b
+  INCLUDES = -I/Users/bastiencantet/Documents/dev/perso/vulkan/ROC/src -isystem /usr/local/include -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/BB_ROC.dir
+  OBJECT_FILE_DIR = CMakeFiles/BB_ROC.dir/src/Device
+
 build CMakeFiles/BB_ROC.dir/src/Platforms/MacOS/MMWindow.m.o: C_COMPILER__BB_ROC_Debug /Users/bastiencantet/Documents/dev/perso/vulkan/ROC/src/Platforms/MacOS/MMWindow.m || cmake_object_order_depends_target_BB_ROC
   DEP_FILE = CMakeFiles/BB_ROC.dir/src/Platforms/MacOS/MMWindow.m.o.d
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -fcolor-diagnostics
@@ -113,7 +120,7 @@ build CMakeFiles/BB_ROC.dir/src/Platforms/MacOS/MMIcon.m.o: C_COMPILER__BB_ROC_D
 #############################################
 # Link the executable BB_ROC
 
-build BB_ROC: CXX_EXECUTABLE_LINKER__BB_ROC_Debug CMakeFiles/BB_ROC.dir/main.cpp.o CMakeFiles/BB_ROC.dir/src/Window/Window.cpp.o CMakeFiles/BB_ROC.dir/src/Images/IconImage.cpp.o CMakeFiles/BB_ROC.dir/src/Instance/Instance.cpp.o CMakeFiles/BB_ROC.dir/src/Device/PhysicalDevice.cpp.o CMakeFiles/BB_ROC.dir/src/Surface/Surface.cpp.o CMakeFiles/BB_ROC.dir/src/Platforms/MacOS/MMWindow.m.o CMakeFiles/BB_ROC.dir/src/Platforms/MacOS/MMIcon.m.o | /usr/local/lib/libvulkan.dylib /opt/homebrew/lib/libglfw.3.3.dylib
+build BB_ROC: CXX_EXECUTABLE_LINKER__BB_ROC_Debug CMakeFiles/BB_ROC.dir/main.cpp.o CMakeFiles/BB_ROC.dir/src/Window/Window.cpp.o CMakeFiles/BB_ROC.dir/src/Images/IconImage.cpp.o CMakeFiles/BB_ROC.dir/src/Instance/Instance.cpp.o CMakeFiles/BB_ROC.dir/src/Device/PhysicalDevice.cpp.o CMakeFiles/BB_ROC.dir/src/Surface/Surface.cpp.o CMakeFiles/BB_ROC.dir/src/Device/LogicalDevice.cpp.o CMakeFiles/BB_ROC.dir/src/Platforms/MacOS/MMWindow.m.o CMakeFiles/BB_ROC.dir/src/Platforms/MacOS/MMIcon.m.o | /usr/local/lib/libvulkan.dylib /opt/homebrew/lib/libglfw.3.3.dylib
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0
   LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib -Wl,-rpath,/opt/homebrew/lib  /usr/local/lib/libvulkan.dylib  /opt/homebrew/lib/libglfw.3.3.dylib  -Xlinker -framework -Xlinker Cocoa
   OBJECT_DIR = CMakeFiles/BB_ROC.dir

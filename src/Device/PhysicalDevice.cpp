@@ -17,8 +17,8 @@
 
 namespace Rc {
 
-    VkPhysicalDevice PhysicalDevice::getPhysicalDevice() const {
-        return _physicalDevice;
+    VkPhysicalDevice& PhysicalDevice::getPhysicalDevice() const {
+        return const_cast<VkPhysicalDevice&>(_physicalDevice);
     }
 
     void PhysicalDevice::findPhysicalDevice(VkInstance &instance) {
@@ -35,6 +35,10 @@ namespace Rc {
                 //msaaSamples = getMaxUsableSampleCount(); //TODO MSAA
                 break;
             }
+        }
+
+        if (_physicalDevice == VK_NULL_HANDLE) {
+            throw std::runtime_error("failed to find a suitable GPU!");
         }
     }
 

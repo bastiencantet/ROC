@@ -204,6 +204,14 @@ namespace Rc {
         return _surface;
     }
 
+    VkQueue &Instance::getGraphicsQueue() {
+        return _graphicsQueue;
+    }
+
+    VkQueue &Instance::getPresentQueue() {
+        return _presentQueue;
+    }
+
 
 }
 

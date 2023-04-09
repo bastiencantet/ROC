@@ -26,6 +26,8 @@ class Instance {
     void createSurface(GLFWwindow *window);
     VkInstance &getInstance();
     VkSurfaceKHR &getSurface();
+    VkQueue &getGraphicsQueue();
+    VkQueue &getPresentQueue();
 private:
     static bool checkValidationLayerSupport();
     [[nodiscard]] bool checkMissingExtensions() const;
@@ -42,10 +44,12 @@ private:
 
 
 
-        VkInstance _instance{};
+        VkInstance _instance;
         VkDebugUtilsMessengerEXT _debugMessenger{};
         bool _validationLayersEnabled = true;
         VkSurfaceKHR _surface;
+        VkQueue _graphicsQueue;
+        VkQueue _presentQueue;
 };
 }
 

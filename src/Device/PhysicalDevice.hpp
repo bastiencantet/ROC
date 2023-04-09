@@ -33,7 +33,7 @@ namespace Rc {
             return instance;
         }
 
-        [[nodiscard]] VkPhysicalDevice getPhysicalDevice() const;
+        VkPhysicalDevice& getPhysicalDevice() const;
         void findPhysicalDevice(VkInstance &instance);
     private:
         bool isDeviceSuitable(VkPhysicalDevice device);
@@ -46,7 +46,7 @@ namespace Rc {
         PhysicalDevice() = default;
 
 
-        VkPhysicalDevice _physicalDevice{};
+        VkPhysicalDevice _physicalDevice;
 
 
     };
