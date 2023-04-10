@@ -14,6 +14,7 @@
 #include <Device/PhysicalDevice.hpp>
 #include <Device/LogicalDevice.hpp>
 #include "Surface/Surface.hpp"
+#include "DescriptorSet/Descriptor.hpp"
 
 #ifdef __APPLE__
 extern "C" void disableMinimizeButton(GLFWwindow *window);
@@ -54,6 +55,20 @@ namespace Rc {
 
         LogicalDevice& logicalDevice = LogicalDevice::getInstance();
         logicalDevice.createLogicalDevice(physicalDevice.getPhysicalDevice(),  surface.getSurface(), _instance);
+
+        SwapChain& swapChain = SwapChain::getInstance();
+        swapChain.createSwapChain(logicalDevice.getLogicalDevice(), surface.getSurface(), physicalDevice, _instance , _window);
+        swapChain.createImageViews(logicalDevice.getLogicalDevice());
+        swapChain.createRenderPass(logicalDevice.getLogicalDevice() , physicalDevice);
+
+        Descriptor& descriptorSet = Descriptor::getInstance();
+        descriptorSet.createDescriptorSetLayout(logicalDevice.getLogicalDevice());
+
+        swapChain.createGraphicsPipeline(logicalDevice.getLogicalDevice(), physicalDevice, descriptorSet);
+
+        Command& command = Command::getInstance();
+        command.createCommandPool(logicalDevice.getLogicalDevice(), surface.getSurface(),  physicalDevice.getPhysicalDevice());
+        command.createCommandBuffers(logicalDevice.getLogicalDevice());
 
         std::cout << "Window created" << std::endl;
 

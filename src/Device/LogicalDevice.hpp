@@ -26,7 +26,7 @@ namespace Rc {
             static LogicalDevice instance;
             return instance;
         }
-        [[nodiscard]] VkDevice getLogicalDevice() const;
+        [[nodiscard]] VkDevice &getLogicalDevice() const;
         void createLogicalDevice(VkPhysicalDevice &physicalDevice, VkSurfaceKHR &surface, Rc::Instance &instance);
 
     private:

@@ -11,6 +11,8 @@
 #include "Images/IconImage.hpp"
 #include <Vulkan/vulkan.h>
 #include "Instance/Instance.hpp"
+#include <SwapChain/SwapChain.hpp>
+#include <Command/Command.hpp>
 
 #ifndef BB_ROC_WINDOW_HPP
 #define BB_ROC_WINDOW_HPP

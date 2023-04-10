@@ -64,8 +64,8 @@ void Rc::LogicalDevice::createLogicalDevice(VkPhysicalDevice &physicalDevice, Vk
     vkGetDeviceQueue(_logicalDevice, indices.presentFamily.value(), 0, &presentQueue);
 }
 
-VkDevice Rc::LogicalDevice::getLogicalDevice() const {
-    return _logicalDevice;
+VkDevice &Rc::LogicalDevice::getLogicalDevice() const {
+    return const_cast<VkDevice &>(_logicalDevice);
 }
 
 Rc::QueueFamilyIndices Rc::LogicalDevice::findQueueFamilies(VkPhysicalDevice device , VkSurfaceKHR &surface) {

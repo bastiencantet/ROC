@@ -14,6 +14,7 @@
 #include <vulkan/vulkan.h>
 #include <vector>
 #include <optional>
+#include <cstring>
 #include <GLFW/glfw3.h>
 
 
