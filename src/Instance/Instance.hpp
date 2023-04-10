@@ -21,6 +21,10 @@
 namespace Rc {
 class Instance {
     public:
+        static Instance &getI() {
+            static Instance instance;
+            return instance;
+        }
         Instance() = default;
         ~Instance() = default;
     void initInstance();
@@ -42,6 +46,7 @@ private:
             VkDebugUtilsMessageTypeFlagsEXT messageType,
             const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
             void *pUserData);
+
 
 
 

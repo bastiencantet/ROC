@@ -187,11 +187,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "CXX compiler"
+					"value" : "No help, variable specified on the command line."
 				}
 			],
-			"type" : "STRING",
-			"value" : "/opt/homebrew/bin/g++-12"
+			"type" : "UNINITIALIZED",
+			"value" : "g++-12"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER_AR",
@@ -1300,6 +1300,18 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "[/usr/local/lib/libvulkan.dylib][/usr/local/include][cfound components: glslc glslangValidator ][v1.3.239()]"
+		},
+		{
+			"name" : "Vma_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Vma."
+				}
+			],
+			"type" : "PATH",
+			"value" : "Vma_DIR-NOTFOUND"
 		},
 		{
 			"name" : "Vulkan_GLSLANG_VALIDATOR_EXECUTABLE",

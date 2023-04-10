@@ -15,7 +15,7 @@ set(SOURCE_FILES
         src/Window/Window.cpp
         src/Images/IconImage.hpp
         src/enums.hpp
-        src/Images/IconImage.cpp src/Instance/Instance.cpp src/Device/PhysicalDevice.hpp src/Device/PhysicalDevice.cpp src/shared.hpp src/Surface/Surface.hpp src/Surface/Surface.cpp src/Device/LogicalDevice.cpp src/SwapChain/SwapChain.hpp src/SwapChain/SwapChain.cpp src/DescriptorSet/Descriptor.hpp src/DescriptorSet/Descriptor.cpp src/Vertex/Vertex.hpp src/Utils/files.hpp src/Command/Command.hpp src/Command/Command.cpp)
+        src/Images/IconImage.cpp src/Instance/Instance.cpp src/Device/PhysicalDevice.hpp src/Device/PhysicalDevice.cpp src/shared.hpp src/Surface/Surface.hpp src/Surface/Surface.cpp src/Device/LogicalDevice.cpp src/SwapChain/SwapChain.hpp src/SwapChain/SwapChain.cpp src/DescriptorSet/Descriptor.hpp src/DescriptorSet/Descriptor.cpp src/Vertex/Vertex.hpp src/Utils/files.hpp src/Command/Command.hpp src/Command/Command.cpp src/Texture/Texture.hpp src/Texture/Texture.cpp src/Allocator/Allocator.hpp src/Allocator/Allocator.cpp)
 
 if(APPLE)
     enable_language(OBJCXX)
@@ -50,7 +50,7 @@ include_directories(src)
 if (APPLE)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-target_link_libraries(${PROJECT_NAME} Vulkan::Vulkan  glfw ${Cocoa})
+target_link_libraries(${PROJECT_NAME} Vulkan::Vulkan glfw ${Cocoa})
 
 else()
     add_executable(${PROJECT_NAME} ${SOURCE_FILES})

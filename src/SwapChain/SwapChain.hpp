@@ -36,6 +36,9 @@ namespace Rc {
         void createImageViews(VkDevice &device);
         void createRenderPass(VkDevice &device, PhysicalDevice &physicalDevice);
         void createGraphicsPipeline(VkDevice &device, PhysicalDevice &physicalDevice, Descriptor &descriptor);
+        void createColorResources(VkDevice &device, PhysicalDevice &physicalDevice);
+        void createDepthResources(VkDevice &device, PhysicalDevice &physicalDevice);
+        void createFramebuffers(VkDevice &device, PhysicalDevice &physicalDevice);
     private:
         VkSwapchainKHR _swapChain;
         std::vector<VkImage> _swapChainImages;
@@ -52,11 +55,33 @@ namespace Rc {
         VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes);
         VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities , GLFWwindow *window);
         QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR &surface);
-        VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags, u_int32_t mipLev, VkDevice &device);
+        static VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags, u_int32_t mipLev, VkDevice &device);
+
 
         //Pipeline
         VkPipelineLayout _pipelineLayout;
         VkPipeline _graphicsPipeline;
+
+        //Color
+
+        void createImage(uint32_t width, uint32_t height, u_int32_t mipLev , VkSampleCountFlagBits numSamples ,VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, VkImage& image, VkDeviceMemory& imageMemory, VkDevice &device);
+        uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties, PhysicalDevice &physicalDevice);
+        VkImageView colorImageView;
+        VkImage colorImage;
+        VkDeviceMemory colorImageMemory;
+        VkSampleCountFlagBits msaaSamples = VK_SAMPLE_COUNT_1_BIT;
+
+        //Depth
+        VkImageView depthImageView;
+        VkImage depthImage;
+        VkDeviceMemory depthImageMemory;
+        void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, VkDevice &device, PhysicalDevice &physicalDevice);
+
+
+        //Framebuffers
+        std::vector<VkFramebuffer> _swapChainFramebuffers;
+
+
 
         VkShaderModule createShaderModule(const std::vector<char> &code , VkDevice &device);
     };

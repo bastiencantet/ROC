@@ -46,6 +46,7 @@ namespace Rc {
             void setTitle(const char *title);
 
 
+
         private:
             static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
 

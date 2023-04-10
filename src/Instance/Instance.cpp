@@ -197,7 +197,7 @@ namespace Rc {
     }
 
     VkInstance &Instance::getInstance() {
-        return _instance;
+        return static_cast<VkInstance &>(_instance);
     }
 
     VkSurfaceKHR &Instance::getSurface() {

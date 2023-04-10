@@ -15,6 +15,7 @@
 #include <Device/LogicalDevice.hpp>
 #include "Surface/Surface.hpp"
 #include "DescriptorSet/Descriptor.hpp"
+#include "Texture/Texture.hpp"
 
 #ifdef __APPLE__
 extern "C" void disableMinimizeButton(GLFWwindow *window);
@@ -44,8 +45,15 @@ namespace Rc {
         _window = glfwCreateWindow(_width, _height, _title, nullptr, nullptr);
         glfwSetWindowUserPointer(_window, this);
         glfwSetFramebufferSizeCallback(_window, framebufferResizeCallback);
+
+        Instance& instance = Instance::getI();
+
+
         _instance.initInstance();
+
         _instance.createSurface(_window);
+
+        instance = _instance;
 
         Surface& surface = Surface::getInstance();
         surface.createSurface(_window, _instance.getInstance());
@@ -69,6 +77,14 @@ namespace Rc {
         Command& command = Command::getInstance();
         command.createCommandPool(logicalDevice.getLogicalDevice(), surface.getSurface(),  physicalDevice.getPhysicalDevice());
         command.createCommandBuffers(logicalDevice.getLogicalDevice());
+
+        swapChain.createColorResources(logicalDevice.getLogicalDevice(), physicalDevice);
+        swapChain.createDepthResources(logicalDevice.getLogicalDevice(), physicalDevice);
+        swapChain.createFramebuffers(logicalDevice.getLogicalDevice(), physicalDevice);
+
+        //TEMP TODO REMOVE
+        std::string path = "/Users/bastiencantet/Documents/dev/perso/vulkan/Vulkan-Tuto/viking_room.png";
+        Texture texture(path);
 
         std::cout << "Window created" << std::endl;
 
